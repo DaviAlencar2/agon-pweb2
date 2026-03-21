@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Página</title></head>
-<body>
-<h1 th:text="${nome}">Placeholder</h1>
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+<body class="bg-gray-100">
+
+<nav th:replace="~{fragments/navbar :: navbar}"></nav>
+
+<main class="max-w-4xl mx-auto mt-8 px-4">
+    <h1 class="text-3xl font-bold text-blue-600">
+        Corrida de perguntas
+    </h1>
+</main>
+
 </body>
 </html>

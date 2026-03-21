@@ -9,7 +9,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("nome", "João");
-        return "index"; // abre templates/index.html
+        return "index";
     }
 }

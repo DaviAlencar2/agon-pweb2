@@ -3,18 +3,69 @@
 
 <head th:replace="~{fragments/head :: head}"></head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen">
 
 <nav th:replace="~{fragments/navbar :: navbar}"></nav>
 
-<main class="mt-8 px-4">
-    <ul>
-        <li th:each="race: ${races}">
-            <span th:text="${race.title}">
+<main class="max-w-5xl mx-auto mt-10 px-4">
 
-            </span>
-        </li>
-    </ul>
+    <h1 class="text-2xl font-bold text-red-700 mb-1">Corridas</h1>
+    <p class="text-gray-500 text-sm mb-8">Escolha uma corrida para jogar ou crie uma nova.</p>
+
+    <!-- Lista vazia -->
+    <p th:if="${#lists.isEmpty(races)}"
+       class="text-gray-400 text-sm">
+        Nenhuma corrida cadastrada ainda.
+    </p>
+
+    <!-- Grid de cards -->
+    <div th:unless="${#lists.isEmpty(races)}"
+         class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <div th:each="race : ${races}"
+             class="bg-white border border-gray-200 rounded-xl p-5 flex flex-col gap-3">
+
+            <!-- Badge ativa/inativa + tempo -->
+            <div class="flex items-center justify-between">
+                <span th:if="${race.active}"
+                      class="bg-red-50 text-red-800 text-xs font-medium px-3 py-0.5 rounded-full">
+                    Ativa
+                </span>
+                <span th:unless="${race.active}"
+                      class="bg-gray-200 text-gray-600 text-xs font-medium px-3 py-0.5 rounded-full">
+                    Inativa
+                </span>
+                <span class="text-xs text-gray-400"
+                      th:text="${race.timeSeconds} + 's'">
+                </span>
+            </div>
+
+            <!-- Título e descrição -->
+            <div>
+                <p class="text-base font-semibold text-gray-800 mb-1"
+                   th:text="${race.title}">
+                </p>
+                <p class="text-sm text-gray-500 leading-relaxed"
+                   th:text="${race.description}">
+                </p>
+            </div>
+
+            <!-- Ações -->
+            <div class="border-t border-gray-100 pt-3 flex gap-2">
+                <a th:href="@{/race/{id}/play(id=${race.id})}"
+                   class="text-sm text-red-700 font-medium px-3 py-1 border border-red-200 rounded-lg hover:bg-red-50 transition">
+                    Jogar
+                </a>
+                <a th:href="@{/race/{id}/edit(id=${race.id})}"
+                   class="text-sm text-gray-500 px-3 py-1 border border-gray-200 rounded-lg hover:bg-gray-50 transition">
+                    Editar
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
 </main>
 
 </body>

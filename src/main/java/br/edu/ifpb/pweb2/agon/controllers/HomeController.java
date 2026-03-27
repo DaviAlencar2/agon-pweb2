@@ -15,6 +15,9 @@ public class HomeController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("races", raceRepository.findAll());
+
+        System.out.println(raceRepository.findAll());
+
         return "index";
     }
 }

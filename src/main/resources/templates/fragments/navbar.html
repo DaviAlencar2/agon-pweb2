@@ -1,4 +1,11 @@
 <nav th:fragment="navbar"
-     class="bg-blue-600 text-white px-6 py-4 shadow">
-    <span class="font-bold text-xl">Agon</span>
+     style="background: #A32D2D;"
+     class="flex items-center justify-between px-6 h-14 shadow">
+
+    <a th:href="@{/}" class="text-xl font-medium text-red-50 tracking-wide">Agon</a>
+
+    <a th:href="@{/race/create}"
+       class="bg-red-50 text-red-800 text-sm font-medium px-4 py-1.5 rounded-md hover:bg-white transition">
+        + Criar corrida
+    </a>
 </nav>

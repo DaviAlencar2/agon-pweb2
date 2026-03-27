@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+<body class="bg-gray-100 min-h-screen">
+
+<nav th:replace="~{fragments/navbar :: navbar}"></nav>
+
+<main class="max-w-xl mx-auto mt-12 px-4">
+
+    <h1 class="text-2xl font-bold text-red-700 mb-1">Nova Corrida</h1>
+    <p class="text-gray-500 text-sm mb-8">Preencha os campos abaixo para criar uma nova corrida.</p>
+
+    <form th:object="${race}" th:action="@{/race/create}" method="post"
+          class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 flex flex-col gap-6">
+
+        <!-- Título -->
+        <div class="flex flex-col gap-1">
+            <label class="text-sm font-medium text-gray-700">Título</label>
+            <input type="text"
+                   th:field="*{title}"
+                   placeholder="Ex: Corrida de Matemática"
+                   class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-400"/>
+            <span th:if="${#fields.hasErrors('title')}"
+                  th:errors="*{title}"
+                  class="text-red-500 text-xs mt-1">
+            </span>
+        </div>
+
+        <!-- Descrição -->
+        <div class="flex flex-col gap-1">
+            <label class="text-sm font-medium text-gray-700">Descrição</label>
+            <textarea th:field="*{description}"
+                      rows="3"
+                      placeholder="Descreva o tema da corrida..."
+                      class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-400 resize-none">
+            </textarea>
+            <span th:if="${#fields.hasErrors('description')}"
+                  th:errors="*{description}"
+                  class="text-red-500 text-xs mt-1">
+            </span>
+        </div>
+
+        <!-- Tempo limite -->
+        <div class="flex flex-col gap-1">
+            <label class="text-sm font-medium text-gray-700">Tempo limite (segundos)</label>
+            <input type="number"
+                   th:field="*{timeSeconds}"
+                   placeholder="Ex: 60"
+                   min="1"
+                   max="600"
+                   class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-400"/>
+            <span th:if="${#fields.hasErrors('timeSeconds')}"
+                  th:errors="*{timeSeconds}"
+                  class="text-red-500 text-xs mt-1">
+            </span>
+        </div>
+
+        <!-- Botões -->
+        <div class="flex gap-3 pt-2">
+            <button type="submit"
+                    class="bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-6 py-2 rounded-lg transition">
+                Criar corrida
+            </button>
+            <a th:href="@{/}"
+               class="text-sm text-gray-500 hover:text-gray-700 px-4 py-2 rounded-lg border border-gray-200 hover:border-gray-300 transition">
+                Cancelar
+            </a>
+        </div>
+
+    </form>
+
+</main>
+
+</body>
+</html>

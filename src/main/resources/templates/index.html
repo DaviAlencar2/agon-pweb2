@@ -7,10 +7,14 @@
 
 <nav th:replace="~{fragments/navbar :: navbar}"></nav>
 
-<main class="max-w-4xl mx-auto mt-8 px-4">
-    <h1 class="text-3xl font-bold text-blue-600">
-        Corrida de perguntas
-    </h1>
+<main class="mt-8 px-4">
+    <ul>
+        <li th:each="race: ${races}">
+            <span th:text="${race.title}">
+
+            </span>
+        </li>
+    </ul>
 </main>
 
 </body>

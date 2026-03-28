@@ -2,6 +2,7 @@ package br.edu.ifpb.pweb2.agon.controllers;
 
 import br.edu.ifpb.pweb2.agon.models.Race;
 import br.edu.ifpb.pweb2.agon.repository.RaceRepository;
+import br.edu.ifpb.pweb2.agon.services.RaceService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ import java.util.List;
 public class RaceController {
 
     @Autowired
-    private RaceRepository raceRepository;
+    private RaceService raceService;
 
     @GetMapping("/create")
     public String showCreateRace(Model model) {
@@ -33,7 +34,8 @@ public class RaceController {
             return "race/createRace";
         }
 
-        raceRepository.save(race);
+        raceService.saveRace(race);
+
         return "redirect:/";
     }
 

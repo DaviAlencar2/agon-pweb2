@@ -2,10 +2,27 @@
      style="background: #A32D2D;"
      class="flex items-center justify-between px-6 h-14 shadow">
 
-    <a th:href="@{/}" class="text-xl font-medium text-red-50 tracking-wide">Agon</a>
+    <a th:href="@{/}" class="text-xl font-bold text-white tracking-wide">Agon</a>
 
-    <a th:href="@{/race/create}"
-       class="bg-red-50 text-red-800 text-sm font-medium px-4 py-1.5 rounded-md hover:bg-white transition">
-        + Criar corrida
-    </a>
+    <div class="flex items-center gap-4">
+
+        <!-- Nome do jogador logado -->
+        <span th:if="${session.player}"
+              th:text="'Olá, ' + ${session.player}"
+              class="text-red-200 text-sm">
+        </span>
+
+        <a th:href="@{/race/create}"
+           class="bg-white text-red-700 text-sm font-medium px-4 py-1.5 rounded-md hover:bg-red-50 transition">
+            + Criar corrida
+        </a>
+
+        <a th:if="${session.player}"
+           th:href="@{/logout}"
+           class="text-red-200 text-sm hover:text-white transition">
+            Sair
+        </a>
+
+    </div>
+
 </nav>

@@ -1,5 +1,6 @@
 package br.edu.ifpb.pweb2.agon.controllers;
 
+import br.edu.ifpb.pweb2.agon.dto.PlayerDto;
 import br.edu.ifpb.pweb2.agon.models.Player;
 import br.edu.ifpb.pweb2.agon.repository.PlayerRepository;
 import br.edu.ifpb.pweb2.agon.services.PlayerService;
@@ -27,7 +28,7 @@ public class AuthController {
 
     // usa a funcao do service que retorna um player e injeta o nome dele na sessao http
     @PostMapping("/login")
-    public String loginOrRegister(@Valid @ModelAttribute Player player, BindingResult result, Model model, HttpSession session){
+    public String loginOrRegister(@Valid @ModelAttribute PlayerDto player, BindingResult result, Model model, HttpSession session){
         if (result.hasErrors()) return "login";
 
         Player playerLogged = playerService.loginOrRegisterPlayer(player);

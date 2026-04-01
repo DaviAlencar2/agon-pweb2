@@ -16,12 +16,12 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(max=50)
     @Getter
     @Setter
     private String name;
 
+    @Getter
+    @Setter
     private String email;
 
     private Boolean admin = false;

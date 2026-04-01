@@ -1,9 +1,11 @@
 package br.edu.ifpb.pweb2.agon.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 @Entity
 public class Race {
     @Id

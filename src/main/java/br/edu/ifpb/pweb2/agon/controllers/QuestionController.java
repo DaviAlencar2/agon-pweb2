@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -26,5 +27,16 @@ public class QuestionController {
         model.addAttribute("race", raceRepository.findById(raceId).orElseThrow());
         return "question/createQuestion";
     }
+
+    @PostMapping("/create")
+    public String createQuestions(@PathVariable Long raceId, @Valid @ModelAttribute QuestionDto questionDto, BindingResult result, Model model){
+        if (result.hasErrors()){
+            model.addAttribute("race", raceRepository.findById(raceId).orElseThrow());
+            return "question/createQuestion";
+        }
+
+        questionService.saveQuestion(questionDto, raceId);
+        return "redirect:/";
+    };
 
 }

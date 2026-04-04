@@ -28,6 +28,18 @@ public class QuestionService {
     }
 
     public void saveQuestion(QuestionDto dto, Long raceId) {
+        Race race = raceRepository.findById(raceId).orElseThrow();
+
+        Question question = new Question();
+
+        question.setStatement(dto.getStatement());
+        question.setOptions(List.of(dto.getOption1(), dto.getOption2(),
+                dto.getOption3(), dto.getOption4()));
+        question.setAnswer(dto.getAnswer());
+        question.setRace(race);
+
+        race.setActive(true); // ativando a corrida, pois ja tem uma pergunta
+        questionRepository.save(question);
 
     }
 }

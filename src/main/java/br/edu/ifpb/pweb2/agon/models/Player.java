@@ -24,6 +24,7 @@ public class Player {
     @Setter
     private String email;
 
+    @Getter
     private Boolean admin = false;
 
     @ManyToMany

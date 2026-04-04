@@ -25,15 +25,47 @@
                   class="text-red-500 text-xs"></span>
         </div>
 
-        <!-- Opções -->
-        <div th:each="i : ${#numbers.sequence(1, 4)}" class="flex flex-col gap-1">
-            <label class="text-sm font-medium text-gray-700"
-                   th:text="'Opção ' + ${i}"></label>
+        <!-- Opção 1 -->
+        <div class="flex flex-col gap-1">
+            <label class="text-sm font-medium text-gray-700">Opção 1</label>
             <input type="text"
-                   th:field="*{__{'option' + i}__}"
+                   th:field="*{option1}"
                    class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-400"/>
-            <span th:if="${#fields.hasErrors('option' + i)}"
-                  th:errors="*{__{'option' + i}__}"
+            <span th:if="${#fields.hasErrors('option1')}"
+                  th:errors="*{option1}"
+                  class="text-red-500 text-xs"></span>
+        </div>
+
+        <!-- Opção 2 -->
+        <div class="flex flex-col gap-1">
+            <label class="text-sm font-medium text-gray-700">Opção 2</label>
+            <input type="text"
+                   th:field="*{option2}"
+                   class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-400"/>
+            <span th:if="${#fields.hasErrors('option2')}"
+                  th:errors="*{option2}"
+                  class="text-red-500 text-xs"></span>
+        </div>
+
+        <!-- Opção 3 -->
+        <div class="flex flex-col gap-1">
+            <label class="text-sm font-medium text-gray-700">Opção 3</label>
+            <input type="text"
+                   th:field="*{option3}"
+                   class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-400"/>
+            <span th:if="${#fields.hasErrors('option3')}"
+                  th:errors="*{option3}"
+                  class="text-red-500 text-xs"></span>
+        </div>
+
+        <!-- Opção 4 -->
+        <div class="flex flex-col gap-1">
+            <label class="text-sm font-medium text-gray-700">Opção 4</label>
+            <input type="text"
+                   th:field="*{option4}"
+                   class="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-400"/>
+            <span th:if="${#fields.hasErrors('option4')}"
+                  th:errors="*{option4}"
                   class="text-red-500 text-xs"></span>
         </div>
 
@@ -57,7 +89,7 @@
                     class="bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-6 py-2 rounded-lg transition">
                 Salvar questão
             </button>
-            <a th:href="@{/race/{id}/questions(id=${race.id})}"
+            <a th:href="@{/}"
                class="text-sm text-gray-500 px-4 py-2 rounded-lg border border-gray-200 hover:border-gray-300 transition">
                 Cancelar
             </a>

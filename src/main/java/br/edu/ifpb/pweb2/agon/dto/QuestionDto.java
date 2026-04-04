@@ -14,7 +14,6 @@ public class QuestionDto {
     @NotBlank
     private String statement;
 
-    // 4 opções fixas como campos separados — mais simples de bindá com Thymeleaf
     @NotBlank
     private String option1;
     @NotBlank
@@ -26,5 +25,5 @@ public class QuestionDto {
 
     @NotNull
     @Min(0) @Max(3)
-    private Integer answer; // índice da opção correta (0 a 3)
+    private Integer answer;
 }

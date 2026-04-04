@@ -22,7 +22,7 @@ public class AuthController {
 
     @GetMapping("/login")
     public String showLogin(Model model){
-        model.addAttribute("player", new Player());
+        model.addAttribute("playerDto", new PlayerDto());
         return "login";
     }
 
@@ -32,8 +32,7 @@ public class AuthController {
         if (result.hasErrors()) return "login";
 
         Player playerLogged = playerService.loginOrRegisterPlayer(player);
-        session.setAttribute("player", playerLogged.getName());
-
+        session.setAttribute("player", playerLogged);
         return "redirect:/";
     }
 

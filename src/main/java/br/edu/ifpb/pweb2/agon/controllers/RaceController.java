@@ -1,5 +1,6 @@
 package br.edu.ifpb.pweb2.agon.controllers;
 
+import br.edu.ifpb.pweb2.agon.dto.RaceDto;
 import br.edu.ifpb.pweb2.agon.models.Race;
 import br.edu.ifpb.pweb2.agon.repository.RaceRepository;
 import br.edu.ifpb.pweb2.agon.services.RaceService;
@@ -23,20 +24,20 @@ public class RaceController {
 
     @GetMapping("/create")
     public String showCreateRace(Model model) {
-        model.addAttribute("race", new Race());
+        model.addAttribute("raceDto", new RaceDto());
         return "race/createRace";
     }
 
     @PostMapping("/create")
-    public String saveNewRace(@Valid @ModelAttribute Race race, BindingResult result, Model model){
+    public String saveNewRace(@Valid @ModelAttribute RaceDto raceDto, BindingResult result, Model model){
 
         if (result.hasErrors()){
             return "race/createRace";
         }
 
-        raceService.saveRace(race);
+       Race race = raceService.saveRace(raceDto);
 
-        return "redirect:/";
+        return "redirect:/race/" + race.getId() + "/questions/create";
     }
 
 }

@@ -13,9 +13,15 @@ public class AdminInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession(false);
 
         boolean logged = session != null  && session.getAttribute("player") != null;
+
+        if (!logged){
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+            return false;
+        }
+
         Player player = (Player) session.getAttribute("player");
 
-        if (!logged || player.getAdmin() != true) {
+        if (!player.getAdmin()) {
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
             return false;
         }

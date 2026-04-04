@@ -18,7 +18,7 @@ public class Race {
     private String description;
 
     @Column(nullable = true)
-    private Integer timeSeconds;
+    private Integer timeSeconds = 0;
 
     private Boolean active = false;
 

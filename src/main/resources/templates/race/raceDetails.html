@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+<body class="bg-gray-100 min-h-screen">
+
+<nav th:replace="~{fragments/navbar :: navbar}"></nav>
+
+<main class="max-w-3xl mx-auto mt-10 px-4 flex flex-col gap-6">
+
+    <!-- Cabeçalho da corrida -->
+    <div class="bg-white border border-gray-200 rounded-xl p-6 flex flex-col gap-3">
+
+        <div class="flex items-center justify-between">
+            <span th:if="${race.active}"
+                  class="bg-red-50 text-red-800 text-xs font-medium px-3 py-0.5 rounded-full">
+                Ativa
+            </span>
+            <span th:unless="${race.active}"
+                  class="bg-gray-200 text-gray-600 text-xs font-medium px-3 py-0.5 rounded-full">
+                Inativa
+            </span>
+            <span class="text-xs text-gray-400"
+                  th:text="${race.timeSeconds} + 's'">
+            </span>
+        </div>
+
+        <div>
+            <h1 class="text-2xl font-bold text-gray-800"
+                th:text="${race.title}"></h1>
+            <p class="text-sm text-gray-500 mt-1"
+               th:text="${race.description}"></p>
+        </div>
+
+        <!-- Ações da corrida -->
+        <div class="flex gap-2 pt-2 border-t border-gray-100">
+            <a th:href="@{/race/{id}/edit(id=${race.id})}"
+               class="text-sm text-gray-600 px-4 py-1.5 border border-gray-200 rounded-lg hover:bg-gray-50 transition">
+                Editar
+            </a>
+
+            <form th:action="@{/race/{id}/toggle(id=${race.id})}" method="post">
+                <button type="submit"
+                        th:text="${race.active} ? 'Desativar' : 'Ativar'"
+                        class="text-sm text-red-700 px-4 py-1.5 border border-red-200 rounded-lg hover:bg-red-50 transition">
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Questões -->
+    <div class="flex flex-col gap-3">
+
+        <div class="flex items-center justify-between">
+            <h2 class="text-lg font-semibold text-gray-700">Questões</h2>
+            <a th:href="@{/race/{id}/questions/create(id=${race.id})}"
+               class="text-sm text-red-700 font-medium px-4 py-1.5 border border-red-200 rounded-lg hover:bg-red-50 transition">
+                + Nova questão
+            </a>
+        </div>
+
+        <p th:if="${#lists.isEmpty(questions)}"
+           class="text-gray-400 text-sm">
+            Nenhuma questão cadastrada ainda.
+        </p>
+
+        <div th:each="q, iter : ${questions}"
+             class="bg-white border border-gray-200 rounded-xl p-5 flex flex-col gap-3">
+
+            <p class="text-sm font-medium text-gray-800"
+               th:text="${iter.index + 1} + '. ' + ${q.statement}"></p>
+
+            <ul class="flex flex-col gap-1">
+                <li th:each="opt, optIter : ${q.options}"
+                    th:classappend="${optIter.index == q.answer} ? 'text-red-700 font-semibold' : 'text-gray-500'"
+                    class="text-sm"
+                    th:text="${optIter.index + 1} + '. ' + ${opt}">
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>

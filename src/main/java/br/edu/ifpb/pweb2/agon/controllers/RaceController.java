@@ -38,9 +38,15 @@ public class RaceController {
             return "race/createRace";
         }
 
-       Race race = raceService.saveRace(raceDto);
+        try {
+            Race race = raceService.saveRace(raceDto);
+            return "redirect:/race/" + race.getId() + "/questions/create";
+        }
 
-        return "redirect:/race/" + race.getId() + "/questions/create";
+        catch (Exception e){
+            result.reject("globalError",e.getMessage());
+            return "race/createRace";
+        }
     }
 
     @GetMapping("/{raceId}/details")

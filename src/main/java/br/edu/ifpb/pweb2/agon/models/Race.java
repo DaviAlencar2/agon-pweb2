@@ -24,4 +24,8 @@ public class Race {
 
     @OneToMany(mappedBy = "race", cascade = CascadeType.ALL)
     private List<Question> questions;
-}
+
+    @ManyToOne
+    @JoinColumn(name = "player_id")
+    private Player createdBy;
+    }

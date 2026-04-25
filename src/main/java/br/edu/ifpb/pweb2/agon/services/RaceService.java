@@ -23,11 +23,13 @@ public class RaceService {
     }
 
     public Race saveRace(RaceDto dto){
-
-        Race race = modelMapper.map(dto, Race.class);
-        raceRepository.save(race);
-
-        return race;
+        try {
+            Race race = modelMapper.map(dto, Race.class);
+            return raceRepository.save(race);
+        }
+        catch (Exception e) {
+            throw new RuntimeException("Erro a salvar corrida:" + e.getMessage());
+        }
     }
 
 }

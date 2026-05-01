@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head}"></head>
+
+<body class="bg-gray-100 min-h-screen">
+
+<nav th:replace="~{fragments/navbar :: navbar}"></nav>
+
+<main class="max-w-xl mx-auto mt-12 px-4">
+
+    <div class="bg-white border border-gray-200 rounded-xl p-8 flex flex-col gap-6">
+
+        <h1 th:text ="'Título da corrida: ' + ${raceTitle}"></h1>
+
+
+        <!-- Enunciado -->
+        <p class="text-base font-semibold text-gray-800"
+           th:text="'Enunciado: ' + ${currentQuestion.statement}"></p>
+
+        <!-- Formulário de resposta -->
+        <form th:action="@{/race/{id}/play(id=${currentQuestion.race.id})}"
+              method="post"
+              class="flex flex-col gap-3">
+
+            <div th:each="opt, iter : ${currentQuestion.options}"
+                 class="flex items-center gap-3 border border-gray-200 rounded-lg px-4 py-3 hover:bg-gray-50 cursor-pointer">
+                <input type="radio"
+                       name="answer"
+                       th:value="${iter.index}"
+                       th:id="'opt' + ${iter.index}"
+                       class="accent-red-600"/>
+                <label th:for="'opt' + ${iter.index}"
+                       th:text="${opt}"
+                       class="text-sm text-gray-700 cursor-pointer w-full"></label>
+            </div>
+
+            <button type="submit"
+                    class="mt-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-6 py-2 rounded-lg transition">
+                Responder
+            </button>
+
+        </form>
+
+    </div>
+
+</main>
+
+</body>
+</html>

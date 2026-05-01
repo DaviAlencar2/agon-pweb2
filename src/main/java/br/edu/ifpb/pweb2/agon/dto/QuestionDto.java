@@ -25,5 +25,5 @@ public class QuestionDto {
 
     @NotNull
     @Min(0) @Max(3)
-    private Integer answer;
+    private int answer;
 }

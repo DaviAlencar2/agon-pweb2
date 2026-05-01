@@ -38,5 +38,4 @@ public class QuestionController {
         questionService.saveQuestion(questionDto, raceId);
         return "redirect:/";
     };
-
 }

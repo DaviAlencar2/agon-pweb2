@@ -19,7 +19,7 @@ public class Question {
     @ElementCollection
     private List<String> options;
 
-    private Integer answer;
+    private int answer;
 
     @ManyToOne
     @JoinColumn(name = "race_id")

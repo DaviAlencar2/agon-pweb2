@@ -1,6 +1,9 @@
 package br.edu.ifpb.pweb2.agon.controllers;
 
+import br.edu.ifpb.pweb2.agon.models.Player;
 import br.edu.ifpb.pweb2.agon.models.Question;
+import br.edu.ifpb.pweb2.agon.models.Result;
+import br.edu.ifpb.pweb2.agon.repository.ResultRepository;
 import br.edu.ifpb.pweb2.agon.session.RaceSession;
 import br.edu.ifpb.pweb2.agon.dto.RaceDto;
 import br.edu.ifpb.pweb2.agon.dto.AnswerDto;
@@ -29,6 +32,8 @@ public class RaceController {
     private RaceRepository raceRepository;
     @Autowired
     private QuestionRepository questionRepository;
+    @Autowired
+    private ResultRepository resultRepository;
 
     @GetMapping("/create")
     public String showCreateRace(Model model) {
@@ -75,9 +80,16 @@ public class RaceController {
             s.setAttribute("raceSession", raceSession);
         }
 
-        if (raceSession.getCurrentIndex() > race.getQuestions().size()) {
+        if (raceSession.getCurrentIndex() >= race.getQuestions().size()) {
             s.removeAttribute("raceSession");
-            return "redirect:/race/{raceId}/result";
+            Result result = new Result();
+            Player player = (Player) s.getAttribute("player");
+            result.setPlayer(player);
+            result.setRace(race);
+            result.setCorrectAnswers(raceSession.getCorrectAnswers());
+            result.setScore(raceSession.getCorrectAnswers());
+            Result saved = resultRepository.save(result);
+            return "redirect:/result/" + saved.getId();
         }
 
         model.addAttribute("currentQuestion", race.getQuestions().get(raceSession.getCurrentIndex()));

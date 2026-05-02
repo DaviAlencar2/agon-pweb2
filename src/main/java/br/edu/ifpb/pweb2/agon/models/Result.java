@@ -1,11 +1,14 @@
 package br.edu.ifpb.pweb2.agon.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
+@Setter
 public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +18,13 @@ public class Result {
     @JoinColumn(name = "player_id")
     private Player player;
 
-    private BigDecimal score;
+    @ManyToOne
+    @JoinColumn(name = "race_id")
+    private Race race;
+
+    private int correctAnswers;
+
+    private int score;
 
     private LocalDateTime createdAt;
 
